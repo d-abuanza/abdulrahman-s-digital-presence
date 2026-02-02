@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Calendar, Mail, Phone, MapPin, Send, Linkedin, MessageCircle } from "lucide-react";
 import concentricCircles from "@/assets/concentric-circles.png";
 import coralCircle from "@/assets/coral-circle.png";
@@ -12,6 +12,17 @@ const ContactSection = () => {
     email: "",
     message: "",
   });
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +44,7 @@ const ContactSection = () => {
         alt=""
         className="absolute top-0 right-0 w-full opacity-20 pointer-events-none translate-x-1/4 -translate-y-1/4"
       />
-      
+
       <motion.img
         src={coralCircle}
         alt=""
@@ -64,29 +75,11 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-primary mb-6">
-                احجز جلستك الاستشارية
-              </h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                هل لديك تحديات في إدارة الموارد البشرية أو بناء ثقافة العمل؟
-                دعنا نتحدث ونجد الحلول معاً.
-              </p>
-              
-              <a
-                href="https://calendly.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-hero inline-flex items-center gap-3"
-              >
-                <Calendar className="w-5 h-5" />
-                احجز موعدك الآن
-              </a>
-            </div>
+            <div className="calendly-inline-widget" data-url="https://calendly.com/diaaabuanza7/30min" style={{ minWidth: '320px', height: '700px' }}></div>
 
             <div className="space-y-4 pt-8 border-t border-border">
               <h4 className="text-lg font-bold text-primary mb-6">أو تواصل مباشرة</h4>
-              
+
               <a
                 href="mailto:info@abdulrahman.sa"
                 className="flex items-center gap-4 text-foreground hover:text-accent transition-colors duration-300 group"
@@ -96,7 +89,7 @@ const ContactSection = () => {
                 </div>
                 <span>info@abdulrahman.sa</span>
               </a>
-              
+
               <a
                 href="tel:+966500000000"
                 className="flex items-center gap-4 text-foreground hover:text-accent transition-colors duration-300 group"
@@ -106,7 +99,7 @@ const ContactSection = () => {
                 </div>
                 <span dir="ltr">+966 50 000 0000</span>
               </a>
-              
+
               <div className="flex items-center gap-4 text-foreground">
                 <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-accent" />
@@ -151,7 +144,7 @@ const ContactSection = () => {
             className="bg-background rounded-3xl p-8 lg:p-10 shadow-xl"
           >
             <h3 className="text-2xl font-bold text-primary mb-6">أرسل رسالة</h3>
-            
+
             <div className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-foreground font-medium mb-2">
@@ -167,7 +160,7 @@ const ContactSection = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="email" className="block text-foreground font-medium mb-2">
                   البريد الإلكتروني
@@ -183,7 +176,7 @@ const ContactSection = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-foreground font-medium mb-2">
                   الرسالة
@@ -198,7 +191,7 @@ const ContactSection = () => {
                   required
                 />
               </div>
-              
+
               <button
                 type="submit"
                 className="w-full btn-hero flex items-center justify-center gap-3"
@@ -209,8 +202,8 @@ const ContactSection = () => {
             </div>
           </motion.form>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 };
 

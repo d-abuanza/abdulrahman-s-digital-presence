@@ -59,7 +59,7 @@ const HeroSection = () => {
             >
               أهلاً بك
             </motion.p>
-            
+
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary mb-6 leading-tight"
               initial={{ opacity: 0, y: 30 }}
@@ -68,7 +68,7 @@ const HeroSection = () => {
             >
               عبدالرحمن العلوني
             </motion.h1>
-            
+
             <motion.p
               className="text-xl md:text-2xl lg:text-3xl text-navy-light mb-8 font-medium"
               initial={{ opacity: 0, y: 30 }}
@@ -77,7 +77,7 @@ const HeroSection = () => {
             >
               قائد استراتيجي ومدير الموارد البشرية
             </motion.p>
-            
+
             <motion.p
               className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
@@ -87,7 +87,7 @@ const HeroSection = () => {
               أساعد المنظمات على بناء ثقافة عمل استثنائية وتطوير رأس المال البشري
               من خلال استراتيجيات مبتكرة ورؤية واضحة نحو التميز المؤسسي
             </motion.p>
-            
+
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 30 }}
@@ -95,9 +95,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <a
-                href="https://calendly.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 className="btn-hero"
               >
                 احجز جلستك الاستشارية الآن
@@ -139,16 +137,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      >
-        <div className="w-8 h-12 border-2 border-primary/30 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-accent rounded-full" />
-        </div>
-      </motion.div>
+
     </section>
   );
 };

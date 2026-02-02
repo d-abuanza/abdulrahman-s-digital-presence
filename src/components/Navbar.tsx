@@ -29,17 +29,16 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-background/95 backdrop-blur-md shadow-lg"
+        : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <a href="#hero" className="flex items-center gap-3">
-            <span className="text-2xl font-bold text-primary">عبدالرحمن العلوني</span>
+            <img src="/signature.png" alt="Abdulrahman Alwani Signature" className="h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -48,7 +47,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline"
+                className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline"
               >
                 {link.label}
               </a>
@@ -58,10 +57,8 @@ const Navbar = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <a
-              href="https://calendly.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-hero text-base px-6 py-3"
+              href="#contact"
+              className="btn-hero text-lg px-8 py-4"
             >
               احجز موعدك
             </a>
