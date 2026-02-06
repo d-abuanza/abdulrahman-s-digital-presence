@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
-import { Linkedin, MessageCircle, Mail, ArrowUp } from "lucide-react";
+import { Linkedin, MessageCircle, Mail, ArrowUp, Calendar } from "lucide-react";
 
 const footerLinks = {
   quickLinks: [
     { label: "الرئيسية", href: "#hero" },
     { label: "من أنا", href: "#about" },
     { label: "الخدمات", href: "#services" },
+    { label: "النتائج", href: "#results" },
     { label: "المقالات", href: "#blog" },
   ],
   services: [
-    { label: "الاستشارات المهنية", href: "#services" },
-    { label: "المحاضرات والفعاليات", href: "#services" },
+    { label: "الاستشارات الشخصية", href: "#services" },
+    { label: "استشارات المنظمات", href: "#services" },
     { label: "ورش العمل", href: "#services" },
     { label: "المنتجات الرقمية", href: "#products" },
   ],
@@ -30,6 +31,23 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Final CTA */}
+        <div className="bg-accent text-accent-foreground rounded-3xl p-8 md:p-12 mb-16 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            هل أنت مستعد لبناء بيئة عمل استثنائية؟
+          </h3>
+          <p className="text-accent-foreground/90 mb-6 max-w-2xl mx-auto">
+            ابدأ رحلة التحول اليوم. المواعيد المتاحة محدودة.
+          </p>
+          <a
+            href="#booking"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-300"
+          >
+            <Calendar className="w-5 h-5" />
+            احجز جلستك الآن
+          </a>
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">

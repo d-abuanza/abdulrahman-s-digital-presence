@@ -2,6 +2,13 @@ import { motion } from "framer-motion";
 import abdulrahmanPhoto from "@/assets/abdulrahman-photo.png";
 import concentricCircles from "@/assets/concentric-circles.png";
 import coralCircle from "@/assets/coral-circle.png";
+import { CheckCircle, Users, Award, Calendar } from "lucide-react";
+
+const trustIndicators = [
+  { icon: Users, label: "+500 عميل راضٍ" },
+  { icon: Award, label: "+15 سنة خبرة" },
+  { icon: CheckCircle, label: "نتائج مضمونة" },
+];
 
 const HeroSection = () => {
   return (
@@ -34,13 +41,6 @@ const HeroSection = () => {
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-40 right-1/4 w-8 h-8 opacity-30"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -51,59 +51,83 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <motion.p
-              className="text-accent text-lg md:text-xl mb-4 font-medium"
+            {/* Value Proposition Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              أهلاً بك
-            </motion.p>
+              <Calendar className="w-5 h-5" />
+              <span className="font-semibold">احجز استشارتك الأولى اليوم</span>
+            </motion.div>
 
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary mb-6 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              عبدالرحمن العلوني
+              حوّل منظمتك إلى
+              <span className="text-accent block mt-2">بيئة عمل استثنائية</span>
             </motion.h1>
 
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl text-navy-light mb-8 font-medium"
+              className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-6 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              استراتيجيات مجربة لبناء ثقافة عمل تجذب أفضل الكفاءات، وتحقق نتائج 
+              ملموسة في أقل من 90 يوماً
+            </motion.p>
+
+            {/* Trust Indicators */}
+            <motion.div
+              className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              قائد استراتيجي ومدير الموارد البشرية
-            </motion.p>
+              {trustIndicators.map((item, index) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2 text-muted-foreground"
+                >
+                  <item.icon className="w-5 h-5 text-accent" />
+                  <span className="text-sm font-medium">{item.label}</span>
+                </div>
+              ))}
+            </motion.div>
 
-            <motion.p
-              className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
-              أساعد المنظمات على بناء ثقافة عمل استثنائية وتطوير رأس المال البشري
-              من خلال استراتيجيات مبتكرة ورؤية واضحة نحو التميز المؤسسي
-            </motion.p>
-
+            {/* Primary CTA */}
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
             >
               <a
-                href="#contact"
-                className="btn-hero"
+                href="#booking"
+                className="btn-hero group relative overflow-hidden"
               >
-                احجز جلستك الاستشارية الآن
+                <span className="relative z-10">احجز جلسة استشارية مجانية</span>
+                <span className="absolute inset-0 bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </a>
-              <a href="#about" className="btn-hero-outline">
-                تعرف علي أكثر
+              <a href="#services" className="btn-hero-outline">
+                اكتشف الخدمات
               </a>
             </motion.div>
+
+            {/* Urgency/Scarcity */}
+            <motion.p
+              className="text-sm text-muted-foreground mt-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            >
+              ⚡ المواعيد المتاحة هذا الأسبوع محدودة
+            </motion.p>
           </motion.div>
 
           {/* Profile Image */}
@@ -126,18 +150,21 @@ const HeroSection = () => {
                 alt="عبدالرحمن العلوني"
                 className="w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] object-cover rounded-full shadow-2xl"
               />
-              {/* Accent dot */}
+              {/* Accent dot with CTA hint */}
               <motion.div
-                className="absolute -bottom-2 -right-2 w-20 h-20 bg-accent rounded-full"
+                className="absolute -bottom-2 -right-2 w-24 h-24 bg-accent rounded-full flex items-center justify-center cursor-pointer"
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-              />
+                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span className="text-accent-foreground text-xs font-bold text-center leading-tight">
+                  احجز<br />الآن
+                </span>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </div>
-
-
     </section>
   );
 };
