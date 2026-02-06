@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Calendar } from "lucide-react";
 
 const navLinks = [
   { label: "الرئيسية", href: "#hero" },
   { label: "من أنا", href: "#about" },
   { label: "الخدمات", href: "#services" },
+  { label: "النتائج", href: "#results" },
   { label: "المقالات", href: "#blog" },
   { label: "المنتجات", href: "#products" },
-  { label: "آراء العملاء", href: "#testimonials" },
-  { label: "تواصل معي", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -54,13 +53,14 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button - More Prominent */}
           <div className="hidden lg:block">
             <a
-              href="#contact"
-              className="btn-hero text-lg px-8 py-4"
+              href="#booking"
+              className="btn-hero text-lg px-8 py-4 flex items-center gap-2"
             >
-              احجز موعدك
+              <Calendar className="w-5 h-5" />
+              احجز استشارتك
             </a>
           </div>
 
@@ -97,12 +97,12 @@ const Navbar = () => {
                   </a>
                 ))}
                 <a
-                  href="https://calendly.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-hero text-center mt-4"
+                  href="#booking"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="btn-hero text-center mt-4 flex items-center justify-center gap-2"
                 >
-                  احجز موعدك
+                  <Calendar className="w-5 h-5" />
+                  احجز استشارتك
                 </a>
               </div>
             </div>
