@@ -1,143 +1,131 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Target, Users, TrendingUp, Award, CheckCircle, ArrowLeft } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { useEffect } from "react";
+
 import concentricCircles from "@/assets/concentric-circles.png";
-import coralCircle from "@/assets/coral-circle.png";
 
-const stats = [
-  { icon: Users, value: "+500", label: "عميل راضٍ" },
-  { icon: TrendingUp, value: "+15", label: "سنة خبرة" },
-  { icon: Award, value: "+50", label: "ورشة عمل" },
-  { icon: Target, value: "+100", label: "مشروع ناجح" },
-];
+interface AboutSectionProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-const achievements = [
-  "قدت تحولات ثقافية في +50 منظمة سعودية",
-  "درّبت +2000 قائد ومدير موارد بشرية",
-  "معتمد من جهات دولية رائدة في المجال",
-  "متحدث في أكبر المؤتمرات المتخصصة",
-];
+const AboutSection = ({ isOpen, onClose }: AboutSectionProps) => {
+  // Lock scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
-const AboutSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // Close on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isOpen, onClose]);
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="relative py-24 lg:py-32 section-white overflow-hidden"
-    >
-      {/* Background decoration */}
-      <img
-        src={concentricCircles}
-        alt=""
-        className="absolute -top-1/2 -left-1/4 w-full opacity-20 pointer-events-none"
-      />
-      
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-20 right-10 w-20 h-20 opacity-40"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.section
+          id="about"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-xl overflow-y-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
         >
-          <span className="text-accent text-lg font-medium mb-4 block">لماذا تختارني</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">خبرة موثوقة، نتائج مثبتة</h2>
-          <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
-        </motion.div>
+          {/* Background decoration */}
+          <img
+            src={concentricCircles}
+            alt=""
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full opacity-20 pointer-events-none"
+          />
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content with Authority Building */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="fixed top-6 left-6 z-50 w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+            aria-label="إغلاق"
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-primary leading-relaxed">
-              المستشار الذي تحتاجه لتحويل تحديات الموارد البشرية إلى فرص نمو
-            </h3>
-            
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              على مدى 15 عاماً، ساعدت المنظمات على تجاوز تحديات دوران الموظفين، 
-              ضعف الإنتاجية، وغياب الثقافة المؤسسية. النتيجة؟ فرق أكثر التزاماً، 
-              وبيئات عمل تنافسية تجذب أفضل الكفاءات.
-            </p>
+            <X className="w-6 h-6" />
+          </button>
 
-            {/* Achievement List */}
-            <ul className="space-y-3">
-              {achievements.map((achievement, index) => (
-                <motion.li
-                  key={achievement}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  className="flex items-center gap-3 text-foreground"
-                >
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                  {achievement}
-                </motion.li>
-              ))}
-            </ul>
-
-            {/* CTA - Authority to Action */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="pt-6"
-            >
-              <a
-                href="#booking"
-                className="btn-hero inline-flex items-center gap-2"
-              >
-                هل منظمتك جاهزة للتحول؟
-                <ArrowLeft className="w-5 h-5" />
-              </a>
-              <p className="text-sm text-muted-foreground mt-3">
-                اكتشف ذلك في جلسة تقييم مجانية (30 دقيقة)
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Stats Grid */}
+          {/* Content Container */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 gap-6"
+            className="container mx-auto px-4 py-20 relative z-10 max-w-5xl"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
-            {stats.map((stat, index) => (
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+              {/* Portrait */}
               <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="bg-card p-8 rounded-2xl shadow-lg card-hover text-center"
+                className="flex-shrink-0"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-accent" />
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-accent/20 blur-3xl" />
+                  <img
+                    src="/alawani-photo.jfif"
+                    alt="عبدالرحمن العلوني"
+                    className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full shadow-2xl relative z-10"
+                  />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-muted-foreground font-medium">{stat.label}</div>
               </motion.div>
-            ))}
+
+              {/* Text Content */}
+              <motion.div
+                className="flex-1 text-center lg:text-right"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+                  من أنا
+                </h2>
+                <div className="w-24 h-1 bg-accent mx-auto lg:mr-0 rounded-full mb-8" />
+
+                <div className="space-y-6 text-lg md:text-xl text-foreground leading-relaxed">
+                  <p>
+                    <span className="font-bold text-accent">عبدالرحمن العلوني</span>،
+                    قائد في مجال الموارد البشرية، أعمل على تمكين المواهب ودفع عجلة النجاح المؤسسي.
+                  </p>
+
+                  <p>
+                    بخبرة عملية تمتد لأكثر من <span className="font-semibold">12 عامًا</span> في مجال الموارد البشرية،
+                    طورت فهمًا عميقًا لمواءمة استراتيجيات الأفراد مع أهداف الأعمال. نهجي يعزز
+                    <span className="font-semibold text-primary"> ثقافة الأداء العالي</span> مع ضمان رفاهية الموظفين ومشاركتهم الفعّالة.
+                  </p>
+
+
+
+                  <p className="text-muted-foreground italic border-r-4 border-accent pr-4">
+                    "كل تحدٍ هو فرصة للابتكار وإنشاء حلول موارد بشرية مؤثرة. تركيزي على إطلاق الإمكانات الكاملة لرأس المال البشري لدفع النمو المستدام وبناء منظمات رشيقة ومستعدة للمستقبل."
+                  </p>
+
+                  <p className="font-semibold text-primary text-2xl">
+                    دعني أساعدك في تحقيق هذا التحول.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </motion.section>
+      )}
+    </AnimatePresence>
   );
 };
 

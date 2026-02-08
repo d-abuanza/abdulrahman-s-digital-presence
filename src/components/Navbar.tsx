@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Calendar } from "lucide-react";
+import { Menu, X } from "lucide-react";
+
+interface NavbarProps {
+  onAboutClick: () => void;
+}
 
 const navLinks = [
   { label: "الرئيسية", href: "#hero" },
-  { label: "من أنا", href: "#about" },
+  { label: "من أنا", href: "#about", isModal: true },
   { label: "الخدمات", href: "#services" },
-  { label: "النتائج", href: "#results" },
-  { label: "المقالات", href: "#blog" },
-  { label: "المنتجات", href: "#products" },
+  { label: "المكتبة الرقمية", href: "#library" },
+  { label: "تواصل معنا", href: "#contact" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ onAboutClick }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -22,6 +25,15 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLinkClick = (link: typeof navLinks[0]) => {
+    if (link.isModal) {
+      onAboutClick();
+      setIsMobileMenuOpen(false);
+    } else {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <motion.nav
@@ -43,23 +55,32 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline"
-              >
-                {link.label}
-              </a>
+              link.isModal ? (
+                <button
+                  key={link.label}
+                  onClick={() => handleLinkClick(link)}
+                  className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline cursor-pointer"
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
 
-          {/* CTA Button - More Prominent */}
+          {/* CTA Button */}
           <div className="hidden lg:block">
             <a
-              href="#booking"
-              className="btn-hero text-lg px-8 py-4 flex items-center gap-2"
+              href="#contact"
+              className="btn-hero text-lg px-8 py-4"
             >
-              <Calendar className="w-5 h-5" />
               احجز استشارتك
             </a>
           </div>
@@ -87,21 +108,30 @@ const Navbar = () => {
             <div className="container mx-auto px-4 py-6">
               <div className="flex flex-col gap-4">
                 {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-lg text-foreground/80 hover:text-accent transition-colors py-2"
-                  >
-                    {link.label}
-                  </a>
+                  link.isModal ? (
+                    <button
+                      key={link.label}
+                      onClick={() => handleLinkClick(link)}
+                      className="text-lg text-foreground/80 hover:text-accent transition-colors py-2 text-right"
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => handleLinkClick(link)}
+                      className="text-lg text-foreground/80 hover:text-accent transition-colors py-2"
+                    >
+                      {link.label}
+                    </a>
+                  )
                 ))}
                 <a
-                  href="#booking"
+                  href="#contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="btn-hero text-center mt-4 flex items-center justify-center gap-2"
+                  className="btn-hero text-center mt-4"
                 >
-                  <Calendar className="w-5 h-5" />
                   احجز استشارتك
                 </a>
               </div>

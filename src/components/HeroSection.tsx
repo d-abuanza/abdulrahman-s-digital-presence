@@ -1,20 +1,52 @@
 import { motion } from "framer-motion";
-import abdulrahmanPhoto from "@/assets/abdulrahman-photo.png";
+import { useState, useEffect } from "react";
+
 import concentricCircles from "@/assets/concentric-circles.png";
 import coralCircle from "@/assets/coral-circle.png";
-import { CheckCircle, Users, Award, Calendar } from "lucide-react";
 
-const trustIndicators = [
-  { icon: Users, label: "+500 عميل راضٍ" },
-  { icon: Award, label: "+15 سنة خبرة" },
-  { icon: CheckCircle, label: "نتائج مضمونة" },
+const jobTitles = [
+  "مستشار موارد بشرية",
+  "خبير ثقافة وبيئة العمل"
 ];
 
 const HeroSection = () => {
+  const [currentTitle, setCurrentTitle] = useState("");
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [charIndex, setCharIndex] = useState(0);
+
+  useEffect(() => {
+    const typingSpeed = isDeleting ? 50 : 100;
+    const pauseTime = 2000; // Pause before deleting
+
+    const timer = setTimeout(() => {
+      const fullTitle = jobTitles[titleIndex];
+
+      if (!isDeleting && charIndex < fullTitle.length) {
+        // Typing forward
+        setCurrentTitle(fullTitle.substring(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      } else if (!isDeleting && charIndex === fullTitle.length) {
+        // Pause before deleting
+        setTimeout(() => setIsDeleting(true), pauseTime);
+      } else if (isDeleting && charIndex > 0) {
+        // Deleting
+        setCurrentTitle(fullTitle.substring(0, charIndex - 1));
+        setCharIndex(charIndex - 1);
+      } else if (isDeleting && charIndex === 0) {
+        // Move to next title
+        setIsDeleting(false);
+        setTitleIndex((titleIndex + 1) % jobTitles.length);
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [charIndex, isDeleting, titleIndex]);
+
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0">
@@ -43,99 +75,13 @@ const HeroSection = () => {
       />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Text Content */}
+        <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12">
+          {/* Profile Image - Now on the right (but reversed in flex) */}
           <motion.div
-            className="flex-1 text-center lg:text-right"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {/* Value Proposition Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Calendar className="w-5 h-5" />
-              <span className="font-semibold">احجز استشارتك الأولى اليوم</span>
-            </motion.div>
-
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary mb-6 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              حوّل منظمتك إلى
-              <span className="text-accent block mt-2">بيئة عمل استثنائية</span>
-            </motion.h1>
-
-            <motion.p
-              className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-6 leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              استراتيجيات مجربة لبناء ثقافة عمل تجذب أفضل الكفاءات، وتحقق نتائج 
-              ملموسة في أقل من 90 يوماً
-            </motion.p>
-
-            {/* Trust Indicators */}
-            <motion.div
-              className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              {trustIndicators.map((item, index) => (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-2 text-muted-foreground"
-                >
-                  <item.icon className="w-5 h-5 text-accent" />
-                  <span className="text-sm font-medium">{item.label}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Primary CTA */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
-              <a
-                href="#booking"
-                className="btn-hero group relative overflow-hidden"
-              >
-                <span className="relative z-10">احجز جلسة استشارية مجانية</span>
-                <span className="absolute inset-0 bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </a>
-              <a href="#services" className="btn-hero-outline">
-                اكتشف الخدمات
-              </a>
-            </motion.div>
-
-            {/* Urgency/Scarcity */}
-            <motion.p
-              className="text-sm text-muted-foreground mt-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-            >
-              ⚡ المواعيد المتاحة هذا الأسبوع محدودة
-            </motion.p>
-          </motion.div>
-
-          {/* Profile Image */}
-          <motion.div
-            className="flex-1 flex justify-center lg:justify-start"
+            className="flex-1 flex justify-center mt-20 lg:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative">
               {/* Decorative ring */}
@@ -146,22 +92,69 @@ const HeroSection = () => {
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
               />
               <img
-                src={abdulrahmanPhoto}
+                src="/alawani-photo.jfif"
                 alt="عبدالرحمن العلوني"
-                className="w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] object-cover rounded-full shadow-2xl"
+                className="w-80 h-80 md:w-96 md:h-96 lg:w-[32rem] lg:h-[32rem] object-cover rounded-full shadow-2xl"
               />
-              {/* Accent dot with CTA hint */}
-              <motion.div
-                className="absolute -bottom-2 -right-2 w-24 h-24 bg-accent rounded-full flex items-center justify-center cursor-pointer"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <span className="text-accent-foreground text-xs font-bold text-center leading-tight">
-                  احجز<br />الآن
-                </span>
-              </motion.div>
             </div>
+          </motion.div>
+
+          {/* Text Content - Now on the left */}
+          <motion.div
+            className="flex-1 text-center lg:text-right"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <motion.h1
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              أهلاً بك
+              <span className="block text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-accent mt-2">
+                عبدالرحمن العلوني
+              </span>
+            </motion.h1>
+
+            {/* Typing Animation */}
+            <motion.div
+              className="min-h-[80px] flex items-center justify-center lg:justify-end mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-muted-foreground">
+                {currentTitle}
+                <span className="text-accent animate-pulse">|</span>
+              </h2>
+            </motion.div>
+
+            {/* Description Text */}
+            <motion.p
+              className="text-lg md:text-xl text-muted-foreground/90 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              أساعدك في بناء ثقافة أداء عالية وبيئة عمل محفزة، من خلال استراتيجيات عملية تعزز مشاركة الموظفين وتدفع النمو المستدام للمنظمات.
+            </motion.p>
+
+            {/* Primary CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            >
+              <a
+                href="#contact"
+                className="btn-hero group relative overflow-hidden inline-block"
+              >
+                <span className="relative z-10">استشارة مجانية</span>
+                <span className="absolute inset-0 bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </a>
+            </motion.div>
           </motion.div>
         </div>
       </div>

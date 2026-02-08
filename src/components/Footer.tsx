@@ -1,115 +1,48 @@
-import { motion } from "framer-motion";
-import { Linkedin, MessageCircle, Mail, ArrowUp, Calendar } from "lucide-react";
 
-const footerLinks = {
-  quickLinks: [
-    { label: "الرئيسية", href: "#hero" },
-    { label: "من أنا", href: "#about" },
-    { label: "الخدمات", href: "#services" },
-    { label: "النتائج", href: "#results" },
-    { label: "المقالات", href: "#blog" },
-  ],
-  services: [
-    { label: "الاستشارات الشخصية", href: "#services" },
-    { label: "استشارات المنظمات", href: "#services" },
-    { label: "ورش العمل", href: "#services" },
-    { label: "المنتجات الرقمية", href: "#products" },
-  ],
-};
+import { Linkedin, Twitter, Mail, ArrowUp } from "lucide-react";
+
 
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navLinks = [
+    { label: "الرئيسية", href: "#hero" },
+    { label: "من أنا", href: "#about" },
+    { label: "الخدمات", href: "#services" },
+    { label: "المكتبة الرقمية", href: "#library" },
+    { label: "تواصل معنا", href: "#contact" },
+  ];
+
+  const socialLinks = [
+    { icon: Linkedin, href: "https://linkedin.com/in/abdulrahman-alalwani", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:contact@abdulrahman-alwani.com", label: "Email" },
+  ];
+
   return (
-    <footer className="relative bg-primary text-primary-foreground pt-20 pb-8 overflow-hidden">
-      {/* Decorative pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full border border-current" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-current" />
-      </div>
-
+    <footer className="bg-primary text-primary-foreground pt-16 pb-8 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        {/* Final CTA */}
-        <div className="bg-accent text-accent-foreground rounded-3xl p-8 md:p-12 mb-16 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            هل أنت مستعد لبناء بيئة عمل استثنائية؟
-          </h3>
-          <p className="text-accent-foreground/90 mb-6 max-w-2xl mx-auto">
-            ابدأ رحلة التحول اليوم. المواعيد المتاحة محدودة.
-          </p>
-          <a
-            href="#booking"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-300"
-          >
-            <Calendar className="w-5 h-5" />
-            احجز جلستك الآن
-          </a>
-        </div>
+        <div className="grid md:grid-cols-3 gap-12 items-center mb-12 border-b border-primary-foreground/10 pb-12">
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <h3 className="text-3xl font-bold mb-4">عبدالرحمن العلوني</h3>
-            <p className="text-primary-foreground/70 mb-6 leading-relaxed max-w-md">
-              خبير استراتيجي في الموارد البشرية وبناء ثقافة العمل المؤسسية.
-              أساعد المنظمات على تحقيق التميز من خلال تطوير رأس المال البشري.
+          {/* Logo & Bio */}
+          {/* Name & Title */}
+          <div className="text-center md:text-right">
+            <h2 className="text-3xl font-bold text-accent mb-2">عبدالرحمن العلوني</h2>
+            <p className="text-primary-foreground/70 max-w-sm mx-auto md:mx-0 leading-relaxed">
+              مستشار موارد بشرية وخبير في تطوير ثقافة وبيئة العمل. أساعد المنظمات على بناء بيئات عمل محفزة ومنتجة.
             </p>
-            
-            {/* Social Links */}
-            <div className="flex gap-4">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://wa.me/966500000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
-              <a
-                href="mailto:info@abdulrahman.sa"
-                className="w-12 h-12 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-bold mb-6">روابط سريعة</h4>
-            <ul className="space-y-3">
-              {footerLinks.quickLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-primary-foreground/70 hover:text-accent transition-colors duration-300"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-lg font-bold mb-6">الخدمات</h4>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
+          <div className="flex flex-col items-center">
+            <h3 className="font-bold text-lg mb-6 text-accent">روابط سريعة</h3>
+            <ul className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+              {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-accent transition-colors duration-300"
+                    className="text-primary-foreground/80 hover:text-accent transition-colors duration-300"
                   >
                     {link.label}
                   </a>
@@ -117,24 +50,50 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          {/* Social & CTA */}
+          <div className="flex flex-col items-center md:items-end gap-6">
+            <div className="flex gap-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+            <a
+              href="#contact"
+              className="bg-accent hover:bg-accent/90 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-300"
+            >
+              احجز استشارتك الآن
+            </a>
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-primary-foreground/50 text-sm">
-            © {new Date().getFullYear()} عبدالرحمن العلوني. جميع الحقوق محفوظة.
-          </p>
-          
-          <motion.button
+        {/* Copyright & Scroll Top */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
+          <p>© {new Date().getFullYear()} عبدالرحمن العلوني. جميع الحقوق محفوظة.</p>
+
+          <button
             onClick={scrollToTop}
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center shadow-lg hover:shadow-accent/30 transition-shadow duration-300"
+            className="flex items-center gap-2 hover:text-accent transition-colors group"
           >
-            <ArrowUp className="w-5 h-5" />
-          </motion.button>
+            <span>العودة للأعلى</span>
+            <div className="w-8 h-8 bg-primary-foreground/10 rounded-full flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all">
+              <ArrowUp className="w-4 h-4" />
+            </div>
+          </button>
         </div>
       </div>
+
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-30" />
     </footer>
   );
 };

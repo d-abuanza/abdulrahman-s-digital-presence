@@ -1,38 +1,35 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
-import ResultsSection from "@/components/ResultsSection";
-import BlogSection from "@/components/BlogSection";
-import ProductsSection from "@/components/ProductsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import BookingSection from "@/components/BookingSection";
+import DigitalLibrarySection from "@/components/DigitalLibrarySection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
-      <Navbar />
-      {/* Hero: Trust + Primary CTA */}
+      <Navbar onAboutClick={() => setIsAboutOpen(true)} />
+
+      {/* Hero: Full-screen intro with typing animation */}
       <HeroSection />
-      {/* About: Authority + Readiness to Pay */}
-      <AboutSection />
-      {/* Services: Direct Sales with Problem/Outcome/Action */}
+
+      {/* About: Focus mode modal */}
+      <AboutSection isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
+
+      {/* Services: Simplified service cards */}
       <ServicesSection />
-      {/* Results: Social Proof & Measurable Outcomes */}
-      <ResultsSection />
-      {/* Testimonials: Trust Building */}
-      <TestimonialsSection />
-      {/* Blog: Lead Generation */}
-      <BlogSection />
-      {/* Products: Low-friction Entry Points */}
-      <ProductsSection />
-      {/* Booking: Core Conversion Hub */}
-      <BookingSection />
-      {/* Contact: Alternative Path */}
+
+      {/* Digital Library: LinkedIn Posts + Books + Free Lead Magnet */}
+      <DigitalLibrarySection />
+
+      {/* Contact: Contact info with CTAs */}
       <ContactSection />
-      {/* Footer: Final CTA */}
+
+      {/* Footer: Copyright and links */}
       <Footer />
     </div>
   );
