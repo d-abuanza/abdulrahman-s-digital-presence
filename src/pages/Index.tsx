@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -8,29 +7,29 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
-
   return (
     <div className="min-h-screen">
-      <Navbar onAboutClick={() => setIsAboutOpen(true)} />
+      <Navbar />
 
-      {/* Hero: Full-screen intro with typing animation */}
-      <HeroSection />
+      <div className="pt-16 lg:pt-24">
+        {/* Hero: Full-screen intro with typing animation */}
+        <HeroSection />
 
-      {/* About: Focus mode modal */}
-      <AboutSection isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
+        {/* About: Inline section */}
+        <AboutSection />
 
-      {/* Services: Simplified service cards */}
-      <ServicesSection />
+        {/* Services: Simplified service cards */}
+        <ServicesSection />
 
-      {/* Digital Library: LinkedIn Posts + Books + Free Lead Magnet */}
-      <DigitalLibrarySection />
+        {/* Digital Library: LinkedIn Posts + Books + Free Lead Magnet */}
+        <DigitalLibrarySection />
 
-      {/* Contact: Contact info with CTAs */}
-      <ContactSection />
+        {/* Contact: Contact info with CTAs */}
+        <ContactSection />
 
-      {/* Footer: Copyright and links */}
-      <Footer />
+        {/* Footer: Copyright and links */}
+        <Footer />
+      </div>
     </div>
   );
 };

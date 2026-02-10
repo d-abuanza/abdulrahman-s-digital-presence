@@ -8,11 +8,11 @@ const Footer = () => {
   };
 
   const navLinks = [
-    { label: "الرئيسية", href: "#hero" },
-    { label: "من أنا", href: "#about" },
-    { label: "الخدمات", href: "#services" },
-    { label: "المكتبة الرقمية", href: "#library" },
-    { label: "تواصل معنا", href: "#contact" },
+    { label: "الرئيسية", href: "/" },
+    { label: "من أنا", href: "/about" },
+    { label: "الخدمات", href: "/services" },
+    { label: "المكتبة الرقمية", href: "/library" },
+    { label: "تواصل معنا", href: "/contact" },
   ];
 
   const socialLinks = [
@@ -68,7 +68,7 @@ const Footer = () => {
               ))}
             </div>
             <a
-              href="#contact"
+              href="/contact"
               className="bg-accent hover:bg-accent/90 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-300"
             >
               احجز استشارتك الآن

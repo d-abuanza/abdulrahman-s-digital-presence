@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import concentricCircles from "@/assets/concentric-circles.png";
@@ -33,22 +33,23 @@ const linkedInPosts: {
         url: "https://linkedin.com/in/abdulrahman-alalwani",
         coverImage: "/first-post/post1_pages-to-jpg-0001.jpg",
         postPagePath: "/library/post/1",
-        pdfUrl: "/post1.pdf",
+        pdfUrl: "/first-post/post1.pdf",
     },
     {
-        title: "5 خطوات لبناء ثقافة عمل قوية",
-        excerpt: "مقتطف من المنشور الذي يتناول أهم الأساليب العملية لتحسين بيئة العمل.",
+        title: "منهجية 60-30-10 — المعادلة السرية لتوزيع وقت القائد الفعال",
+        excerpt: "في كل فريق يتقدم، وكل منظمة نجحت، هناك شيء واحد مشترك: القائد يعرف أين يضع وقته. ولهذا أعتمد قاعدة ذهبية في إدارة وقتي: قاعدة 60-30-10.",
         url: "https://linkedin.com/in/abdulrahman-alalwani",
+        coverImage: "/secound-post/post2_page-0001.jpg",
+        postPagePath: "/library/post/2",
+        pdfUrl: "/secound-post/post2.pdf",
     },
     {
-        title: "كيف تحافظ على أفضل الكفاءات في فريقك؟",
-        excerpt: "استراتيجيات عملية لتقليل معدل الاستقالات وزيادة ولاء الموظفين.",
+        title: "الترحيب بالموظف الجديد لا يكفي",
+        excerpt: "لا شيء يُربك الموظف في يومه الأول أكثر من الغموض. لا يعرف من يتبع، أو كيف يتصرّف، أو ما المتوقع منه. وهنا يأتي دور الدليل الإرشادي، الذي لا يعتبر ترفًا، بل أداة تزرع الاستقرار والولاء من اليوم الأول.",
         url: "https://linkedin.com/in/abdulrahman-alalwani",
-    },
-    {
-        title: "أخطاء شائعة في إدارة الموارد البشرية",
-        excerpt: "تعرف على أهم الأخطاء التي يقع فيها مديرو الموارد البشرية وكيفية تجنبها.",
-        url: "https://linkedin.com/in/abdulrahman-alalwani",
+        coverImage: "/thired-post/post3_page-0001.jpg",
+        postPagePath: "/library/post/3",
+        pdfUrl: "/thired-post/post3.pdf",
     },
 ];
 
@@ -58,8 +59,15 @@ const booksForSale = [
         description: "خارطة طريق عملية تساعدك على بناء بيئة مؤسسية صحية، وتحوّلك من قائدٍ مشغول بالمهام إلى قائدٍ يُلهم ويؤثّر ويصنع فارقًا في منظمته. أدوات عملية، نماذج واقعية، والركائز السبع لبيئة عمل إيجابية.",
         price: "19$",
         url: "https://alalwani.gumroad.com/l/positiveleader",
+        coverImage: "/Book-2/الكتاب الاول للعلونى_page-0001.jpg",
     },
-];
+    ];
+
+const FREE_BOOK = {
+    title: "الليد ماجنت الأول — من عبدالرحمن العلوني",
+    coverImage: "/Book-1/الليد_ماجنت_الاول_لعبدالرحمن_العلونى_page-0001.jpg",
+    pdfPath: "/Book-1/الليد_ماجنت_الاول_لعبدالرحمن_العلونى.pdf",
+};
 
 const DigitalLibrarySection = () => {
     const ref = useRef(null);
@@ -69,6 +77,7 @@ const DigitalLibrarySection = () => {
     const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [leadSaved, setLeadSaved] = useState(false);
     const [guideDownloadOpen, setGuideDownloadOpen] = useState(false);
     const [guideDownloadEmail, setGuideDownloadEmail] = useState("");
     const [guideDownloadSubmitting, setGuideDownloadSubmitting] = useState(false);
@@ -82,6 +91,8 @@ const DigitalLibrarySection = () => {
         if (!name.trim() || !email.trim() || !email.includes("@")) return;
         setIsSubmitting(true);
         setSubmitSuccess(false);
+        setLeadSaved(false);
+        let saved = false;
         try {
             if (leadMagnetEndpoint) {
                 const res = await fetch(leadMagnetEndpoint, {
@@ -91,20 +102,29 @@ const DigitalLibrarySection = () => {
                         name: name.trim(),
                         email: email.trim(),
                         fromEmail: LEAD_MAGNET_FROM_EMAIL,
+                        pdfPath: FREE_BOOK.pdfPath,
+                        bookTitle: FREE_BOOK.title,
                     }),
                 });
-                if (!res.ok) throw new Error("Submit failed");
+                if (res.ok) saved = true;
+                else throw new Error("Submit failed");
             }
-            setSubmitSuccess(true);
-            setName("");
-            setEmail("");
         } catch {
-            setSubmitSuccess(true);
-            setName("");
-            setEmail("");
-        } finally {
-            setIsSubmitting(false);
+            // Continue to download even if save failed
         }
+        setLeadSaved(saved);
+        // Always trigger download
+        const link = document.createElement("a");
+        link.href = FREE_BOOK.pdfPath;
+        link.download = "الليد-ماجنت-الأول-عبدالرحمن-العلوني.pdf";
+        link.rel = "noopener";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setSubmitSuccess(true);
+        setName("");
+        setEmail("");
+        setIsSubmitting(false);
     };
 
     const handleGuideDownloadSubmit = async (e: React.FormEvent) => {
@@ -127,13 +147,15 @@ const DigitalLibrarySection = () => {
                     }),
                 });
             }
-            const link = document.createElement("a");
-            link.href = guideDownloadPost.pdfUrl ?? "/post1.pdf";
-            link.download = "دليل-رواتب.pdf";
-            link.rel = "noopener";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (guideDownloadPost.pdfUrl) {
+                const link = document.createElement("a");
+                link.href = guideDownloadPost.pdfUrl;
+                link.download = guideDownloadPost.pdfUrl.split("/").pop() ?? "دليل.pdf";
+                link.rel = "noopener";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
             setGuideDownloadOpen(false);
             setGuideDownloadEmail("");
             setGuideDownloadPost(null);
@@ -174,7 +196,13 @@ const DigitalLibrarySection = () => {
                     <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                         منشورات مختارة من لينكدإن، كتب عملية، وكتاب مجاني عند إدخال بريدك.
                     </p>
-                    <div className="w-24 h-1 bg-accent mx-auto rounded-full mt-6" />
+                    <motion.div
+                    className="w-24 h-1 bg-accent mx-auto rounded-full mt-6"
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    style={{ transformOrigin: "center" }}
+                />
                 </motion.div>
 
                 {/* Tabs – text only */}
@@ -184,9 +212,11 @@ const DigitalLibrarySection = () => {
                     transition={{ duration: 0.5, delay: 0.15 }}
                     className="flex justify-center gap-1 p-1.5 bg-primary/5 rounded-2xl max-w-md mx-auto mb-12"
                 >
-                    <button
+                    <motion.button
                         type="button"
                         onClick={() => setActiveTab(LINKEDIN_TAB)}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         className={`flex-1 py-3 px-6 rounded-xl font-semibold text-lg transition-all duration-300 ${
                             activeTab === LINKEDIN_TAB
                                 ? "bg-background text-primary shadow-sm"
@@ -194,10 +224,12 @@ const DigitalLibrarySection = () => {
                         }`}
                     >
                         منشورات لينكدإن
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
                         type="button"
                         onClick={() => setActiveTab(BOOKS_TAB)}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         className={`flex-1 py-3 px-6 rounded-xl font-semibold text-lg transition-all duration-300 ${
                             activeTab === BOOKS_TAB
                                 ? "bg-background text-primary shadow-sm"
@@ -205,15 +237,17 @@ const DigitalLibrarySection = () => {
                         }`}
                     >
                         الكتب
-                    </button>
+                    </motion.button>
                 </motion.div>
 
-                {/* LinkedIn content */}
+                <AnimatePresence mode="wait">
                 {activeTab === LINKEDIN_TAB && (
                     <motion.div
-                        initial={{ opacity: 0, y: 16 }}
+                        key="linkedin"
+                        initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.3 }}
                         className="mb-16"
                     >
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -223,15 +257,17 @@ const DigitalLibrarySection = () => {
                                     initial={{ opacity: 0, y: 24 }}
                                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
+                                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
                                     className="group bg-background rounded-2xl border border-primary/10 shadow-md hover:shadow-xl hover:border-primary/15 overflow-hidden transition-all duration-300"
                                 >
-                                    {/* Cover: first-post image or LinkedIn strip */}
+                                    {/* Cover: first-post image or LinkedIn strip – fits fully inside card */}
                                     {post.coverImage ? (
-                                        <div className="aspect-[3/4] max-h-52 overflow-hidden bg-muted/30 border-b border-border">
+                                        <div className="w-full aspect-[3/4] max-h-72 overflow-hidden rounded-t-2xl bg-muted/30 border-b border-border flex items-center justify-center p-2">
                                             <img
                                                 src={post.coverImage}
                                                 alt=""
-                                                className="w-full h-full object-cover object-top"
+                                                className="max-w-full max-h-full w-auto h-auto object-contain"
+                                                style={{ objectFit: 'contain', objectPosition: 'center' }}
                                             />
                                         </div>
                                     ) : (
@@ -295,24 +331,37 @@ const DigitalLibrarySection = () => {
                     </motion.div>
                 )}
 
-                {/* Books content – single book, reduced card size, centered */}
                 {activeTab === BOOKS_TAB && (
                     <motion.div
-                        initial={{ opacity: 0, y: 16 }}
+                        key="books"
+                        initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.3 }}
                         className="mb-16 flex justify-center"
                     >
-                        <div className="w-full max-w-sm">
+                        <div className="flex flex-wrap justify-center gap-6 lg:gap-8 max-w-4xl mx-auto">
                             {booksForSale.map((book, index) => (
                                 <motion.article
                                     key={book.title}
                                     initial={{ opacity: 0, y: 24 }}
                                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
-                                    className="group bg-background rounded-xl border border-primary/10 shadow-md hover:shadow-xl hover:border-primary/15 overflow-hidden transition-all duration-300"
+                                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                                    className="group bg-background rounded-xl border border-primary/10 shadow-md hover:shadow-xl hover:border-primary/15 overflow-hidden transition-all duration-300 w-full max-w-sm"
                                 >
-                                    <div className="w-full aspect-[3/4] max-h-56 bg-gradient-to-br from-accent/15 via-primary/10 to-accent/20 group-hover:from-accent/25 group-hover:to-primary/15 transition-colors duration-300" />
+                                    {"coverImage" in book && book.coverImage ? (
+                                        <div className="w-full aspect-[3/4] max-h-56 overflow-hidden bg-muted/30 border-b border-border flex items-center justify-center">
+                                            <img
+                                                src={book.coverImage}
+                                                alt={book.title}
+                                                className="w-full h-full object-contain object-center"
+                                                style={{ objectFit: "contain", objectPosition: "center" }}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="w-full aspect-[3/4] max-h-56 bg-gradient-to-br from-accent/15 via-primary/10 to-accent/20 group-hover:from-accent/25 group-hover:to-primary/15 transition-colors duration-300" />
+                                    )}
                                     <div className="p-4 text-right">
                                         <h3 className="text-base font-bold text-primary mb-2 leading-tight">
                                             {book.title}
@@ -337,8 +386,9 @@ const DigitalLibrarySection = () => {
                         </div>
                     </motion.div>
                 )}
+                </AnimatePresence>
 
-                {/* Free lead magnet – name + email, then book sent to that email (from diaaabuanza7@gmail.com) */}
+                {/* Free book: direct download + save name/email via API for future leads (no email sent to user) */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -353,12 +403,13 @@ const DigitalLibrarySection = () => {
                                     تحميل مجاني
                                 </h3>
                                 <h4 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
-                                    دليلك المبسط إلى كشف المشكلات الصامتة التي تعيق الولاء والإنتاجية
+                                    {FREE_BOOK.title}
                                 </h4>
                                 {submitSuccess ? (
                                     <p className="text-lg text-primary-foreground/95">
-                                        شكراً! تم إرسال رابط التحميل إلى بريدك الإلكتروني. راجع صندوق الوارد (أو البريد المزعج) من{" "}
-                                        <span className="font-medium">{LEAD_MAGNET_FROM_EMAIL}</span>.
+                                        شكراً! تم بدء تحميل الكتاب.
+                                        {leadSaved && " تم حفظ بريدك لدينا لتلقي عروض وموارد حصرية لاحقاً."}
+                                        {!leadSaved && leadMagnetEndpoint && " لم نتمكن من حفظ بريدك الآن؛ جرّب لاحقاً أو تواصل معنا."}
                                     </p>
                                 ) : (
                                     <form onSubmit={handleLeadMagnetDownload} className="space-y-4">
@@ -380,32 +431,54 @@ const DigitalLibrarySection = () => {
                                             className="w-full px-5 py-3.5 rounded-xl bg-background/10 border border-white/20 text-primary-foreground placeholder:text-primary-foreground/60 focus:outline-none focus:ring-2 focus:ring-accent text-right"
                                             dir="rtl"
                                         />
-                                        <button
+                                        <motion.button
                                             type="submit"
                                             disabled={isSubmitting}
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
                                             className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-bold hover:bg-accent/90 disabled:opacity-70 transition-all duration-300"
                                         >
                                             {isSubmitting ? "جاري الإرسال…" : "تحميل"}
-                                        </button>
+                                        </motion.button>
                                         <p className="text-sm text-primary-foreground/75">
                                             لن نشارك بياناتك مع طرف ثالث. بإدخال بريدك قد تصلك موارد وعروض حصرية.
                                         </p>
                                     </form>
                                 )}
                             </div>
-                            {/* Visual: stacked documents */}
-                            <div className="hidden lg:flex flex-1 justify-center items-center min-h-[240px]">
-                                <div className="relative w-48 h-64">
-                                    <div className="absolute inset-0 bg-background/20 rounded-lg shadow-xl transform rotate-[-6deg] border border-white/10" />
-                                    <div className="absolute inset-0 bg-background/25 rounded-lg shadow-xl transform rotate-[2deg] translate-x-2 -translate-y-1 border border-white/10" />
-                                    <div className="absolute inset-0 bg-background/30 rounded-lg shadow-xl transform rotate-[6deg] translate-x-4 -translate-y-2 border border-white/10 flex items-center justify-center p-4">
-                                        <p className="text-xs font-bold text-center text-primary-foreground/90 leading-relaxed">
-                                            دليلك المبسط
-                                            <br />
-                                            كشف المشكلات الصامتة
-                                        </p>
+                            {/* Visual: free book cover – artistic frame and soft overlay */}
+                            <div className="hidden lg:flex flex-1 justify-center items-center min-h-[380px]">
+                                <motion.div
+                                    className="relative"
+                                    animate={{ y: [0, -10, 0] }}
+                                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    {/* Back shadow layer for depth */}
+                                    <div className="absolute inset-0 w-60 h-[360px] rounded-xl bg-primary/40 blur-xl scale-95 translate-x-1 translate-y-2" />
+                                    {/* Decorative accent strip */}
+                                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-40 h-1.5 bg-accent/80 rounded-full blur-sm z-10" />
+                                    <div className="relative w-60 h-[360px] rounded-xl overflow-hidden shadow-2xl border-2 border-white/30 ring-2 ring-white/10">
+                                        <img
+                                            src={FREE_BOOK.coverImage}
+                                            alt={FREE_BOOK.title}
+                                            className="w-full h-full object-cover object-top saturate-110 contrast-[1.02]"
+                                        />
+                                        {/* Gradient overlay to soften and add depth */}
+                                        <div
+                                            className="absolute inset-0 pointer-events-none"
+                                            style={{
+                                                background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 25%, transparent 70%, rgba(0,0,0,0.15) 100%)",
+                                            }}
+                                        />
+                                        {/* Subtle vignette */}
+                                        <div
+                                            className="absolute inset-0 pointer-events-none rounded-xl"
+                                            style={{
+                                                boxShadow: "inset 0 0 60px rgba(0,0,0,0.12)",
+                                            }}
+                                        />
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
                         </div>
                     </div>

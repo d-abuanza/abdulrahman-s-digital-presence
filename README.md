@@ -76,6 +76,19 @@ When a visitor downloads a guide after entering their email, you can receive a n
    Replace `YOUR_FORM_ID` with the ID from your Formspree URL.
 5. Restart the dev server (`npm run dev`). After that, each guide download will POST the visitor’s email and guide title to Formspree, and you’ll get an email with the message: *"This email address has downloaded [guide title]."*
 
+## Free book signup (lead magnet) — where to check saved emails
+
+When a visitor enters their name and email to download the free book, the app sends that data to `VITE_LEAD_MAGNET_ENDPOINT` so you can save it for future leads. The book is downloaded directly; no email is sent to the visitor.
+
+**How to check if emails were saved:**
+
+1. **If you use Formspree** for `VITE_LEAD_MAGNET_ENDPOINT`:
+   - Go to [formspree.io](https://formspree.io) → your form → **Submissions**. Every signup appears there with name and email.
+2. **If you use your own backend** (e.g. database): check your admin panel or database table where you store the POST body (`name`, `email`, etc.).
+3. **If `VITE_LEAD_MAGNET_ENDPOINT` is not set:** nothing is saved; the app still lets the user download the book. Set the env variable and restart the server to start saving.
+
+**Quick setup with Formspree (same as above):** create a new form, copy its URL (e.g. `https://formspree.io/f/yyyyyyyy`), add to `.env`: `VITE_LEAD_MAGNET_ENDPOINT=https://formspree.io/f/yyyyyyyy`, restart the app. Then check Formspree → Submissions to see all signups.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.

@@ -15,6 +15,14 @@ const FIRST_POST_IMAGES = Array.from({ length: 10 }, (_, i) =>
     `/first-post/post1_pages-to-jpg-${String(i + 1).padStart(4, "0")}.jpg`
 );
 
+const SECOND_POST_IMAGES = Array.from({ length: 6 }, (_, i) =>
+    `/secound-post/post2_page-${String(i + 1).padStart(4, "0")}.jpg`
+);
+
+const THIRD_POST_IMAGES = Array.from({ length: 10 }, (_, i) =>
+    `/thired-post/post3_page-${String(i + 1).padStart(4, "0")}.jpg`
+);
+
 const NOTIFY_EMAIL = "diaaabuanza7@gmail.com";
 const downloadNotifyEndpoint = import.meta.env.VITE_DOWNLOAD_NOTIFY_ENDPOINT as string | undefined;
 
@@ -22,7 +30,7 @@ const POST_CONTENT: Record<string, { title: string; content: string; images: str
     "1": {
         title: "أكثر من 63% من الموظفين يغادرون لأن الرواتب أقل من توقعاتهم",
         images: FIRST_POST_IMAGES,
-        pdfUrl: "/post1.pdf",
+        pdfUrl: "/first-post/post1.pdf",
         content: `أكثر من 63% من الموظفين يغادرون لأن الرواتب أقل من توقعاتهم
 
 الراتب لم يعد مجرد رقم بل رسالة مباشرة من الشركة تقول فيها للموظف: "أنت تستحق."
@@ -30,6 +38,27 @@ const POST_CONTENT: Record<string, { title: string; content: string; images: str
 وعندما تكون هذه الرسالة ضعيفة، فإن أقوى المواهب تردّ عليها بالاستقالة.
 
 في هذا الدليل سأوجهك لبناء نظام رواتب يكافئ الموظفين لا يجبرهم على الرحيل.`,
+    },
+    "2": {
+        title: "منهجية 60-30-10 — المعادلة السرية لتوزيع وقت القائد الفعال",
+        images: SECOND_POST_IMAGES,
+        pdfUrl: "/secound-post/post2.pdf",
+        content: `منهجية 60-30-10
+المعادلة السرية لتوزيع وقت القائد الفعال
+
+في كل فريق يتقدم، وكل منظمة نجحت، هناك شيء واحد مشترك:
+القائد يعرف أين يضع وقته.
+ولهذا أعتمد قاعدة ذهبية في إدارة وقتي: قاعدة 60-30-10`,
+    },
+    "3": {
+        title: "الترحيب بالموظف الجديد لا يكفي",
+        images: THIRD_POST_IMAGES,
+        pdfUrl: "/thired-post/post3.pdf",
+        content: `الترحيب بالموظف الجديد لا يكفي
+
+لا شيء يُربك الموظف في يومه الأول أكثر من الغموض.
+لا يعرف من يتبع، أو كيف يتصرّف، أو ما المتوقع منه.
+وهنا يأتي دور الدليل الإرشادي، الذي لا يعتبر ترفًا، بل أداة تزرع الاستقرار والولاء من اليوم الأول.`,
     },
 };
 
@@ -91,13 +120,15 @@ const PostPage = () => {
                     }),
                 });
             }
-            const link = document.createElement("a");
-            link.href = post.pdfUrl ?? "/post1.pdf";
-            link.download = "دليل-رواتب.pdf";
-            link.rel = "noopener";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (post.pdfUrl) {
+                const link = document.createElement("a");
+                link.href = post.pdfUrl;
+                link.download = post.pdfUrl.split("/").pop() ?? "دليل.pdf";
+                link.rel = "noopener";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
             setDownloadOpen(false);
             setDownloadEmail("");
         } finally {
@@ -108,10 +139,10 @@ const PostPage = () => {
     if (!post) {
         return (
             <div className="min-h-screen bg-background">
-                <Navbar onAboutClick={() => {}} />
-                <div className="pt-28 container mx-auto px-4 py-24 text-center">
+                <Navbar />
+                <div className="pt-16 lg:pt-24 container mx-auto px-4 py-24 text-center">
                     <p className="text-muted-foreground mb-6">المنشور غير موجود.</p>
-                    <Link to="/#library" className="text-accent font-semibold hover:underline">
+                    <Link to="/library" className="text-accent font-semibold hover:underline">
                         العودة إلى المكتبة الرقمية
                     </Link>
                 </div>
@@ -121,10 +152,10 @@ const PostPage = () => {
 
     return (
         <div className="min-h-screen bg-background" dir="rtl">
-            <Navbar onAboutClick={() => {}} />
-            <main className="pt-28 container mx-auto px-4 py-8 max-w-4xl">
+            <Navbar />
+            <main className="pt-16 lg:pt-24 container mx-auto px-4 py-8 max-w-4xl">
                 <Link
-                    to="/#library"
+                    to="/library"
                     className="inline-block text-muted-foreground hover:text-primary text-sm font-medium mb-8"
                 >
                     ← العودة إلى المكتبة الرقمية

@@ -148,7 +148,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.9 }}
             >
               <a
-                href="#contact"
+                href="/contact"
                 className="btn-hero group relative overflow-hidden inline-block"
               >
                 <span className="relative z-10">استشارة مجانية</span>

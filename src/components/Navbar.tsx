@@ -1,38 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-interface NavbarProps {
-  onAboutClick: () => void;
-}
-
 const navLinks = [
-  { label: "الرئيسية", href: "#hero" },
-  { label: "من أنا", href: "#about", isModal: true },
-  { label: "الخدمات", href: "#services" },
-  { label: "المكتبة الرقمية", href: "#library" },
-  { label: "تواصل معنا", href: "#contact" },
+  { label: "الرئيسية", href: "/" },
+  { label: "من أنا", href: "/about" },
+  { label: "الخدمات", href: "/services" },
+  { label: "المكتبة الرقمية", href: "/library" },
+  { label: "تواصل معنا", href: "/contact" },
 ];
 
-const Navbar = ({ onAboutClick }: NavbarProps) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleLinkClick = (link: typeof navLinks[0]) => {
-    if (link.isModal) {
-      onAboutClick();
-      setIsMobileMenuOpen(false);
-    } else {
-      setIsMobileMenuOpen(false);
-    }
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -40,45 +22,32 @@ const Navbar = ({ onAboutClick }: NavbarProps) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-background/95 backdrop-blur-md shadow-lg"
-        : "bg-transparent"
-        }`}
+      className="fixed top-0 right-0 left-0 z-50 bg-background/95 backdrop-blur-md shadow-sm transition-all duration-300"
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3">
             <img src="/signature.png" alt="Abdulrahman Alwani Signature" className="h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              link.isModal ? (
-                <button
-                  key={link.label}
-                  onClick={() => handleLinkClick(link)}
-                  className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline cursor-pointer"
-                >
-                  {link.label}
-                </button>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline"
-                >
-                  {link.label}
-                </a>
-              )
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-lg text-foreground/80 hover:text-accent transition-colors duration-300 font-medium link-underline"
+              >
+                {link.label}
+              </a>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden lg:block">
             <a
-              href="#contact"
+              href="/contact"
               className="btn-hero text-lg px-8 py-4"
             >
               احجز استشارتك
@@ -108,27 +77,17 @@ const Navbar = ({ onAboutClick }: NavbarProps) => {
             <div className="container mx-auto px-4 py-6">
               <div className="flex flex-col gap-4">
                 {navLinks.map((link) => (
-                  link.isModal ? (
-                    <button
-                      key={link.label}
-                      onClick={() => handleLinkClick(link)}
-                      className="text-lg text-foreground/80 hover:text-accent transition-colors py-2 text-right"
-                    >
-                      {link.label}
-                    </button>
-                  ) : (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => handleLinkClick(link)}
-                      className="text-lg text-foreground/80 hover:text-accent transition-colors py-2"
-                    >
-                      {link.label}
-                    </a>
-                  )
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={handleLinkClick}
+                    className="text-lg text-foreground/80 hover:text-accent transition-colors py-2 text-right"
+                  >
+                    {link.label}
+                  </a>
                 ))}
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="btn-hero text-center mt-4"
                 >
