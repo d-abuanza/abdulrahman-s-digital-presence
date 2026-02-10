@@ -1,9 +1,9 @@
+/* Arabic Font - Noto Sans Arabic */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Arabic Font - Using Noto Sans Arabic as fallback since custom fonts not provided */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap');
 
 /* Design System for Abdulrahman Alalwani's Personal Website */
 @layer base {
