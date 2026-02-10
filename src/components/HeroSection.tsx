@@ -118,14 +118,14 @@ const HeroSection = () => {
               </span>
             </motion.h1>
 
-            {/* Typing Animation */}
+            {/* Typing Animation - right-aligned under the name (use start in RTL) */}
             <motion.div
-              className="min-h-[80px] flex items-center justify-center lg:justify-end mb-6"
+              className="min-h-[80px] flex items-center justify-center lg:justify-start mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-muted-foreground">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-muted-foreground text-right">
                 {currentTitle}
                 <span className="text-accent animate-pulse">|</span>
               </h2>

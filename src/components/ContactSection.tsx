@@ -8,7 +8,7 @@ const contactMethods = [
   {
     icon: Mail,
     label: "البريد الإلكتروني",
-    href: "mailto:abdulrahmn.alalwani@gmail.com",
+    href: "mailto:diaaabuanza7@gmail.com",
   },
   {
     icon: Linkedin,

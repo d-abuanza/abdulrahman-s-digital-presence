@@ -60,6 +60,22 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Download notification email (guide PDF)
+
+When a visitor downloads a guide after entering their email, you can receive a notification at your inbox. This requires a form service that sends you an email on submit (the app only POSTs data; it cannot send email by itself).
+
+**Using Formspree (free):**
+
+1. Go to [formspree.io](https://formspree.io) and create an account (or sign in).
+2. Click **New form**, name it (e.g. "Guide download notifications"), and set the email where you want to receive notifications (e.g. `diaaabuanza7@gmail.com`).
+3. Copy your form endpoint (e.g. `https://formspree.io/f/xxxxxxxx`).
+4. In the project root, create a file named `.env` and add:
+   ```env
+   VITE_DOWNLOAD_NOTIFY_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
+   ```
+   Replace `YOUR_FORM_ID` with the ID from your Formspree URL.
+5. Restart the dev server (`npm run dev`). After that, each guide download will POST the visitor’s email and guide title to Formspree, and you’ll get an email with the message: *"This email address has downloaded [guide title]."*
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.

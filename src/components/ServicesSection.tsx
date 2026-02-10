@@ -63,25 +63,31 @@ const ServicesSection = () => {
           <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
         </motion.div>
 
-        {/* Services Grid - Clean minimal design */}
+        {/* Services Grid – text-only, typography-driven */}
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-12">
             {services.map((service, index) => (
-              <motion.div
+              <motion.article
                 key={service.title}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 28 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="group bg-background rounded-2xl p-8 shadow-sm border border-primary/10 hover:border-accent/30 hover:shadow-md transition-all duration-300"
+                transition={{ duration: 0.5, delay: 0.12 + index * 0.07 }}
+                className="group relative rounded-2xl bg-background border border-primary/8 shadow-sm hover:shadow-lg hover:border-primary/15 transition-all duration-300 overflow-hidden"
               >
-                <h3 className="text-xl md:text-2xl font-bold text-accent mb-4 leading-tight text-right">
-                  {service.title}
-                </h3>
-
-                <p className="text-muted-foreground leading-relaxed text-right">
-                  {service.description}
-                </p>
-              </motion.div>
+                <div className="relative p-8 lg:p-10 text-right">
+                  <h3 className="text-xl md:text-2xl font-bold text-accent leading-tight mb-3">
+                    {service.title}
+                  </h3>
+                  {/* Accent underline – grows on hover */}
+                  <div
+                    className="h-0.5 w-12 bg-accent rounded-full mb-5 opacity-80 group-hover:w-20 transition-all duration-300"
+                    aria-hidden
+                  />
+                  <p className="text-muted-foreground leading-relaxed text-base">
+                    {service.description}
+                  </p>
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
