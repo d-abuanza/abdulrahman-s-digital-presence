@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        arabic: ["'Noto Sans Arabic'", "sans-serif"],
+        arabic: ["'ITF Qomra Arabic'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -153,10 +153,10 @@ const PostPage = () => {
     return (
         <div className="min-h-screen bg-background" dir="rtl">
             <Navbar />
-            <main className="pt-16 lg:pt-24 container mx-auto px-4 py-8 max-w-4xl">
+            <main className="pt-24 container mx-auto px-4 py-8 max-w-4xl">
                 <Link
                     to="/library"
-                    className="inline-block text-muted-foreground hover:text-primary text-sm font-medium mb-8"
+                    className="inline-flex items-center gap-2 rounded-xl border-2 border-primary text-primary px-5 py-2.5 text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors mb-8 w-fit"
                 >
                     ← العودة إلى المكتبة الرقمية
                 </Link>

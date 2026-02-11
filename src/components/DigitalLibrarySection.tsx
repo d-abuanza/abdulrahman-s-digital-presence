@@ -310,7 +310,7 @@ const DigitalLibrarySection = () => {
                                                         "bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
                                                     )}
                                                 >
-                                                    تحميل الدليل
+                                                    تحميل المنشور
                                                 </button>
                                             )}
                                         </div>
@@ -493,7 +493,7 @@ const DigitalLibrarySection = () => {
                 >
                     <DialogContent className="sm:max-w-md" dir="rtl">
                         <DialogHeader>
-                            <DialogTitle className="text-right">تحميل الدليل</DialogTitle>
+                            <DialogTitle className="text-right">تحميل المنشور</DialogTitle>
                             <DialogDescription className="text-right">
                             أدخل بريدك الإلكتروني للحصول على احدث المنشورات والدلائل الجديدة                            </DialogDescription>
                         </DialogHeader>
