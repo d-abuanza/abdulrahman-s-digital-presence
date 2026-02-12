@@ -76,25 +76,27 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12">
-          {/* Profile Image - Now on the right (but reversed in flex) */}
+          {/* Profile Image - blended with background */}
           <motion.div
-            className="flex-1 flex justify-center mt-20 lg:mt-0"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="flex-1 flex justify-center mt-20 lg:mt-0 relative"
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative">
-              {/* Decorative ring */}
-              <motion.div
-                className="absolute inset-0 rounded-full border-4 border-accent/30"
-                style={{ transform: "scale(1.1)" }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              {/* Colored overlay behind image to neutralize gray background */}
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{ backgroundColor: "#FCFAF8", filter: "blur(40px)", transform: "scale(0.85)" }}
               />
               <img
-                src="/alawani-photo.jfif"
+                src="/hero-4k.png"
                 alt="عبدالرحمن العلوني"
-                className="w-80 h-80 md:w-96 md:h-96 lg:w-[32rem] lg:h-[32rem] object-cover rounded-full shadow-2xl"
+                className="relative w-80 md:w-[28rem] lg:w-[36rem] h-auto object-contain mix-blend-multiply"
+                style={{
+                  maskImage: "radial-gradient(ellipse 85% 90% at 50% 35%, black 55%, transparent 90%)",
+                  WebkitMaskImage: "radial-gradient(ellipse 85% 90% at 50% 35%, black 55%, transparent 90%)",
+                }}
               />
             </div>
           </motion.div>
