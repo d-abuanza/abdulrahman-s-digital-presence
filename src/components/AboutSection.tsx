@@ -32,14 +32,11 @@ const AboutSection = () => {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-accent/20 blur-3xl" />
-              <img
-                src="/alawani-photo.jfif"
-                alt="عبدالرحمن العلوني"
-                className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full shadow-2xl relative z-10"
-              />
-            </div>
+            <img
+              src="/about-photo.png"
+              alt="عبدالرحمن العلوني"
+              className="w-56 md:w-72 lg:w-80 h-auto object-contain drop-shadow-lg"
+            />
           </motion.div>
 
           {/* Text Content */}
