@@ -1,8 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calendar, ArrowLeft, BookOpen } from "lucide-react";
-import coralCircle from "@/assets/coral-circle.png";
-
 const articles = [
   {
     title: "كيف تبني ثقافة عمل إيجابية في منظمتك",
@@ -46,22 +44,6 @@ const BlogSection = () => {
       ref={ref}
       className="relative py-24 lg:py-32 section-white overflow-hidden"
     >
-      {/* Decorative elements */}
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-20 left-20 w-16 h-16 opacity-40"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute bottom-40 right-10 w-24 h-24 opacity-30"
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

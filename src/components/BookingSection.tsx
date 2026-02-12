@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { Calendar, Clock, CheckCircle, Shield, ArrowLeft } from "lucide-react";
 import concentricCircles from "@/assets/concentric-circles.png";
-import coralCircle from "@/assets/coral-circle.png";
 
 const bookingOptions = [
   {
@@ -73,14 +72,6 @@ const BookingSection = () => {
         src={concentricCircles}
         alt=""
         className="absolute top-0 right-0 w-full opacity-10 pointer-events-none translate-x-1/4 -translate-y-1/4"
-      />
-
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute bottom-20 left-20 w-28 h-28 opacity-20"
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">

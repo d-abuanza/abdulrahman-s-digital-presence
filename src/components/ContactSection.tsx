@@ -2,8 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
 import concentricCircles from "@/assets/concentric-circles.png";
-import coralCircle from "@/assets/coral-circle.png";
-
 const contactMethods = [
   {
     icon: Mail,
@@ -32,14 +30,6 @@ const ContactSection = () => {
         src={concentricCircles}
         alt=""
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full opacity-20 pointer-events-none"
-      />
-
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-20 left-10 w-24 h-24 opacity-40"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">

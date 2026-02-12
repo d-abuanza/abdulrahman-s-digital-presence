@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 import concentricCircles from "@/assets/concentric-circles.png";
-import coralCircle from "@/assets/coral-circle.png";
-
 const jobTitles = [
   "مستشار موارد بشرية",
   "خبير ثقافة وبيئة العمل"
@@ -57,22 +55,6 @@ const HeroSection = () => {
           style={{ animationDuration: "120s" }}
         />
       </div>
-
-      {/* Decorative Coral Circles */}
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-20 left-10 w-24 h-24 opacity-60"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute bottom-32 right-20 w-16 h-16 opacity-40"
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12">

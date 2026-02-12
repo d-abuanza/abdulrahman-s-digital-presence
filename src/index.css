@@ -47,11 +47,11 @@
 @layer base {
   :root {
     /* Core Brand Colors */
-    --background: 40 33% 98%;
+    --background: 0 0% 100%;
     --foreground: 213 50% 23%;
     
-    /* Cream/Off-white backgrounds */
-    --card: 40 33% 96%;
+    /* Section & card backgrounds — same as digital library (#FFFFFF) */
+    --card: 0 0% 100%;
     --card-foreground: 213 50% 23%;
     
     --popover: 0 0% 100%;
@@ -86,8 +86,8 @@
     
     --radius: 0.75rem;
     
-    /* Section backgrounds */
-    --section-cream: 40 33% 97%;
+    /* Section backgrounds — all #FFFFFF (same as digital library) */
+    --section-cream: 0 0% 100%;
     --section-white: 0 0% 100%;
     
     /* Decorative */

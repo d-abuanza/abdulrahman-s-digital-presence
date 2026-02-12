@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { BookOpen, Download, Gift } from "lucide-react";
 import concentricCircles from "@/assets/concentric-circles.png";
-import coralCircle from "@/assets/coral-circle.png";
 
 const booksForSale = [
     {
@@ -47,14 +46,6 @@ const BooksSection = () => {
                 src={concentricCircles}
                 alt=""
                 className="absolute bottom-0 left-0 w-2/3 opacity-25 pointer-events-none -translate-x-1/3 translate-y-1/4"
-            />
-
-            <motion.img
-                src={coralCircle}
-                alt=""
-                className="absolute top-32 right-20 w-20 h-20 opacity-40"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
 
             <div className="container mx-auto px-4 relative z-10">

@@ -1,8 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { TrendingUp, Users, Clock, Award, ArrowLeft } from "lucide-react";
-import coralCircle from "@/assets/coral-circle.png";
-
 const results = [
   {
     metric: "40%",
@@ -61,22 +59,6 @@ const ResultsSection = () => {
       ref={ref}
       className="relative py-24 lg:py-32 section-white overflow-hidden"
     >
-      {/* Decorative elements */}
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-32 left-20 w-20 h-20 opacity-30"
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute bottom-20 right-10 w-28 h-28 opacity-20"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

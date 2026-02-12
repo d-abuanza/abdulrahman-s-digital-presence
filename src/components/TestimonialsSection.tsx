@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Quote, ChevronLeft, ChevronRight, Star, ArrowLeft } from "lucide-react";
-import coralCircle from "@/assets/coral-circle.png";
 import concentricCircles from "@/assets/concentric-circles.png";
 
 const testimonials = [
@@ -67,22 +66,6 @@ const TestimonialsSection = () => {
         src={concentricCircles}
         alt=""
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full opacity-20 pointer-events-none"
-      />
-      
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute top-20 right-20 w-24 h-24 opacity-30"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute bottom-20 left-10 w-16 h-16 opacity-40"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
       <div className="container mx-auto px-4 relative z-10">

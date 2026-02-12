@@ -2,7 +2,6 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import concentricCircles from "@/assets/concentric-circles.png";
-import coralCircle from "@/assets/coral-circle.png";
 import {
     Dialog,
     DialogContent,
@@ -174,13 +173,6 @@ const DigitalLibrarySection = () => {
                 src={concentricCircles}
                 alt=""
                 className="absolute top-0 right-0 w-2/3 opacity-20 pointer-events-none translate-x-1/3 -translate-y-1/4"
-            />
-            <motion.img
-                src={coralCircle}
-                alt=""
-                className="absolute bottom-32 left-10 w-24 h-24 opacity-40"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
 
             <div className="container mx-auto px-4 relative z-10">

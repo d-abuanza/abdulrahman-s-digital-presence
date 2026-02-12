@@ -1,6 +1,5 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import coralCircle from "@/assets/coral-circle.png";
 import concentricCircles from "@/assets/concentric-circles.png";
 
 const services = [
@@ -41,14 +40,6 @@ const ServicesSection = () => {
         src={concentricCircles}
         alt=""
         className="absolute top-0 right-0 w-2/3 opacity-30 pointer-events-none translate-x-1/3 -translate-y-1/4"
-      />
-
-      <motion.img
-        src={coralCircle}
-        alt=""
-        className="absolute bottom-20 left-10 w-32 h-32 opacity-30"
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">
