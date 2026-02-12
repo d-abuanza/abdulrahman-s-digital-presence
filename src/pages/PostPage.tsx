@@ -219,7 +219,7 @@ const PostPage = () => {
                                     onClick={() => setDownloadOpen(true)}
                                     className="px-6 py-3 rounded-xl font-semibold bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25 transition-all"
                                 >
-                                    تحميل الدليل
+                                    تحميل المنشور
                                 </button>
                             </div>
                         )}
@@ -227,9 +227,9 @@ const PostPage = () => {
                         <Dialog open={downloadOpen} onOpenChange={setDownloadOpen}>
                             <DialogContent className="sm:max-w-md" dir="rtl">
                                 <DialogHeader>
-                                    <DialogTitle className="text-right">تحميل الدليل</DialogTitle>
+                                    <DialogTitle className="text-right">تحميل المنشور</DialogTitle>
                                     <DialogDescription className="text-right">
-                                        حمّل الدليل واحصل على أحدث المنشورات. أدخل بريدك الإلكتروني لتحميل الدليل.
+                                        حمّل المنشور واحصل على أحدث المنشورات. أدخل بريدك الإلكتروني لتحميل المنشور.
                                     </DialogDescription>
                                 </DialogHeader>
                                 <form onSubmit={handleDownloadSubmit} className="space-y-4 pt-2">
