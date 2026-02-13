@@ -74,7 +74,7 @@ const ServicesSection = () => {
                     className="h-0.5 w-12 bg-accent rounded-full mb-5 opacity-80 group-hover:w-20 transition-all duration-300"
                     aria-hidden
                   />
-                  <p className="text-muted-foreground leading-relaxed text-base">
+                  <p className="text-foreground leading-relaxed text-base">
                     {service.description}
                   </p>
                 </div>
