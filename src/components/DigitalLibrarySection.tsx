@@ -185,9 +185,6 @@ const DigitalLibrarySection = () => {
                     <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
                         المكتبة الرقمية
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                        منشورات مختارة من لينكدإن، كتب عملية، وكتاب مجاني عند إدخال بريدك.
-                    </p>
                     <motion.div
                     className="w-24 h-1 bg-accent mx-auto rounded-full mt-6"
                     initial={{ scaleX: 0 }}
