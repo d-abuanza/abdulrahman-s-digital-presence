@@ -168,7 +168,7 @@ const PostPage = () => {
                         </h1>
                     </header>
 
-                    <div className="rounded-xl bg-muted/50 p-6 text-right whitespace-pre-line text-muted-foreground leading-relaxed">
+                    <div className="rounded-xl bg-muted/50 p-6 text-right whitespace-pre-line text-foreground leading-relaxed">
                         {post.content}
                     </div>
 
