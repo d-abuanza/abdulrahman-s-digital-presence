@@ -54,6 +54,18 @@ export default {
         warm: "hsl(var(--warm))",
         "navy-dark": "hsl(var(--navy-dark))",
         "navy-light": "hsl(var(--navy-light))",
+        highlight: {
+          DEFAULT: "hsl(var(--highlight))",
+          hover: "hsl(var(--highlight-hover))",
+        },
+        "royal-purple": {
+          DEFAULT: "hsl(var(--royal-purple))",
+          hover: "hsl(var(--royal-purple-hover))",
+        },
+        lavender: {
+          DEFAULT: "hsl(var(--lavender))",
+          dark: "hsl(var(--lavender-dark))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

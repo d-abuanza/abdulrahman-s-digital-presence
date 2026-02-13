@@ -61,9 +61,9 @@
     --primary: 213 50% 23%;
     --primary-foreground: 40 33% 98%;
     
-    /* Coral Accent */
-    --accent: 8 85% 65%;
-    --accent-foreground: 0 0% 100%;
+    /* Golden Amber — Primary Accent (refined from #FFA500) */
+    --accent: 37 88% 48%;
+    --accent-foreground: 272 39% 17%;
     
     /* Secondary - Muted Navy */
     --secondary: 213 30% 90%;
@@ -73,16 +73,16 @@
     --muted: 40 20% 94%;
     --muted-foreground: 213 20% 50%;
     
-    /* Gold/Warm accent (inspired by reference) */
-    --warm: 42 87% 55%;
-    --warm-foreground: 213 50% 15%;
+    /* Amber hover variant */
+    --warm: 37 89% 41%;
+    --warm-foreground: 272 39% 17%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 40 20% 88%;
-    --input: 40 20% 88%;
-    --ring: 8 85% 65%;
+    --border: 294 15% 90%;
+    --input: 294 15% 90%;
+    --ring: 37 88% 48%;
     
     --radius: 0.75rem;
     
@@ -91,19 +91,27 @@
     --section-white: 0 0% 100%;
     
     /* Decorative */
-    --coral: 8 85% 65%;
+    --coral: 7 100% 86%;
     --navy-dark: 213 55% 18%;
     --navy-light: 213 40% 35%;
+    
+    /* Extended palette */
+    --highlight: 7 100% 86%;
+    --highlight-hover: 7 100% 82%;
+    --royal-purple: 271 29% 30%;
+    --royal-purple-hover: 270 29% 39%;
+    --lavender: 294 20% 82%;
+    --lavender-dark: 295 16% 73%;
     
     /* Sidebar (keeping for compatibility) */
     --sidebar-background: 40 33% 98%;
     --sidebar-foreground: 213 50% 23%;
     --sidebar-primary: 213 50% 23%;
     --sidebar-primary-foreground: 40 33% 98%;
-    --sidebar-accent: 8 85% 65%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 8 85% 65%;
+    --sidebar-accent: 37 88% 48%;
+    --sidebar-accent-foreground: 272 39% 17%;
+    --sidebar-border: 294 15% 90%;
+    --sidebar-ring: 37 88% 48%;
   }
 
   .dark {
@@ -119,33 +127,33 @@
     --primary: 40 33% 98%;
     --primary-foreground: 213 50% 23%;
     
-    --accent: 8 85% 65%;
-    --accent-foreground: 0 0% 100%;
-    
+    --accent: 37 85% 55%;
+    --accent-foreground: 272 39% 17%;
+
     --secondary: 213 40% 20%;
     --secondary-foreground: 40 33% 98%;
     
     --muted: 213 40% 18%;
     --muted-foreground: 40 20% 70%;
     
-    --warm: 42 87% 55%;
-    --warm-foreground: 213 50% 10%;
+    --warm: 37 89% 41%;
+    --warm-foreground: 272 39% 17%;
     
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 40 33% 98%;
     
     --border: 213 40% 20%;
     --input: 213 40% 20%;
-    --ring: 8 85% 65%;
+    --ring: 37 85% 55%;
     
     --sidebar-background: 213 55% 10%;
     --sidebar-foreground: 40 33% 98%;
-    --sidebar-primary: 8 85% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 37 85% 55%;
+    --sidebar-primary-foreground: 272 39% 17%;
     --sidebar-accent: 213 40% 20%;
     --sidebar-accent-foreground: 40 33% 98%;
     --sidebar-border: 213 40% 20%;
-    --sidebar-ring: 8 85% 65%;
+    --sidebar-ring: 37 85% 55%;
   }
 }
 
@@ -241,4 +249,13 @@
   /* Warm utilities */
   .text-warm { color: hsl(var(--warm)); }
   .bg-warm { background-color: hsl(var(--warm)); }
+  
+  /* Extended palette utilities */
+  .text-highlight { color: hsl(var(--highlight)); }
+  .bg-highlight { background-color: hsl(var(--highlight)); }
+  .text-royal-purple { color: hsl(var(--royal-purple)); }
+  .bg-royal-purple { background-color: hsl(var(--royal-purple)); }
+  .text-lavender { color: hsl(var(--lavender)); }
+  .bg-lavender { background-color: hsl(var(--lavender)); }
+  .border-lavender { border-color: hsl(var(--lavender)); }
 }

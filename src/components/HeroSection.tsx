@@ -97,7 +97,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               أهلاً بك
-              <span className="block text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-accent mt-2">
+              <span className="block text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-black mt-2">
                 عبدالرحمن العلوني
               </span>
             </motion.h1>
@@ -109,7 +109,7 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-muted-foreground text-right">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground text-right">
                 {currentTitle}
                 <span className="text-accent animate-pulse">|</span>
               </h2>
